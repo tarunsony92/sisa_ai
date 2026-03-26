@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Secure Data Intelligence Platform</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>🔐 AI Secure Data Intelligence Platform</h1>
+                <p>Advanced Security Analysis Gateway</p>
+            </div>
+            <div class="status-indicator">
+                <span id="apiStatus" class="status-dot online"></span>
+                <span id="statusText">Online</span>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="text-analysis">Text Analysis</button>
+            <button class="tab-button" data-tab="file-upload">File Upload</button>
+            <button class="tab-button" data-tab="results">Results</button>
+            <button class="tab-button" data-tab="docs">Documentation</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Tab 1: Text Analysis -->
+            <section id="text-analysis" class="tab-content active">
+                <div class="card">
+                    <h2>Text Input Analysis</h2>
+                    <p class="subtitle">Paste text, logs, or code for security analysis</p>
+                    
+                    <div class="input-group">
+                        <label for="inputType">Input Type:</label>
+                        <select id="inputType">
+                            <option value="text">Plain Text</option>
+                            <option value="log">Log File</option>
+                            <option value="sql">SQL Code</option>
+                            <option value="chat">Chat Logs</option>
+                        </select>
+                    </div>
+
+                    <div class="textarea-group">
+                        <label for="textInput">Content:</label>
+                        <textarea 
+                            id="textInput" 
+                            placeholder="Paste your content here...
+Example:
+password=admin123
+api_key=sk-prod-xyz
+email=admin@company.com"
+                            rows="12"></textarea>
+                    </div>
+
+                    <div class="options-group">
+                        <label>
+                            <input type="checkbox" id="maskOption" checked>
+                            Mask Sensitive Data
+                        </label>
+                        <label>
+                            <input type="checkbox" id="blockHighRiskOption" checked>
+                            Block High Risk Content
+                        </label>
+                        <label>
+                            <input type="checkbox" id="logAnalysisOption" checked>
+                            Enable Log Analysis
+                        </label>
+                        <label>
+                            <input type="checkbox" id="aiInsightsOption" checked>
+                            Generate AI Insights
+                        </label>
+                    </div>
+
+                    <button id="analyzeBtn" class="btn btn-primary">
+                        <span class="btn-icon">🔍</span> Analyze
+                    </button>
+                </div>
+            </section>
+
+            <!-- Tab 2: File Upload -->
+            <section id="file-upload" class="tab-content">
+                <div class="card">
+                    <h2>File Upload</h2>
+                    <p class="subtitle">Upload log files, documents, or text files for analysis</p>
+
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <h3>Drag & Drop Files Here</h3>
+                        <p>or click to browse</p>
+                        <input 
+                            type="file" 
+                            id="fileInput" 
+                            accept=".txt,.log,.pdf,.doc,.docx"
+                            style="display: none;">
+                    </div>
+
+                    <div id="fileInfo" class="file-info hidden">
+                        <p><strong>File:</strong> <span id="fileName"></span></p>
+                        <p><strong>Size:</strong> <span id="fileSize"></span></p>
+                    </div>
+
+                    <button id="uploadBtn" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                        <span class="btn-icon">⬆️</span> Upload & Analyze
+                    </button>
+                </div>
+            </section>
+
+            <!-- Tab 3: Results -->
+            <section id="results" class="tab-content">
+                <div id="noResults" class="card" style="text-align: center; padding: 40px;">
+                    <p style="color: #666; font-size: 16px;">No analysis results yet. Analyze some content first!</p>
+                </div>
+
+                <div id="resultsContainer" style="display: none;">
+                    <!-- Summary Card -->
+                    <div class="card">
+                        <h2>Analysis Summary</h2>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-value" id="summaryText">-</div>
+                                <div class="summary-label">Summary</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="risk-badge" id="riskLevelBadge">N/A</div>
+                                <div class="summary-label">Risk Level</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-value" id="riskScore">0</div>
+                                <div class="summary-label">Risk Score</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-value" id="findingsCount">0</div>
+                                <div class="summary-label">Findings</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Breakdown -->
+                    <div class="card">
+                        <h2>Risk Breakdown</h2>
+                        <div class="risk-breakdown">
+                            <div class="risk-item critical">
+                                <span class="risk-label">Critical</span>
+                                <span class="risk-count" id="criticalCount">0</span>
+                            </div>
+                            <div class="risk-item high">
+                                <span class="risk-label">High</span>
+                                <span class="risk-count" id="highCount">0</span>
+                            </div>
+                            <div class="risk-item medium">
+                                <span class="risk-label">Medium</span>
+                                <span class="risk-count" id="mediumCount">0</span>
+                            </div>
+                            <div class="risk-item low">
+                                <span class="risk-label">Low</span>
+                                <span class="risk-count" id="lowCount">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Insights -->
+                    <div class="card" id="insightsCard" style="display: none;">
+                        <h2>🤖 AI Insights</h2>
+                        <div id="insightsList" class="insights-list"></div>
+                    </div>
+
+                    <!-- Findings Table -->
+                    <div class="card">
+                        <h2>Detailed Findings</h2>
+                        <div id="findingsTable" class="findings-table"></div>
+                    </div>
+
+                    <!-- Log Analysis Section -->
+                    <div class="card" id="logAnalysisCard" style="display: none;">
+                        <h2>Log Analysis Details</h2>
+                        <div id="logAnalysisDetails"></div>
+                    </div>
+
+                    <!-- Masked Content -->
+                    <div class="card" id="maskedContentCard" style="display: none;">
+                        <h2>Masked Content</h2>
+                        <div id="maskedContent" class="masked-content"></div>
+                        <button class="btn btn-secondary" onclick="copyToClipboard()">
+                            Copy Masked Content
+                        </button>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="card" id="recommendationsCard" style="display: none;">
+                        <h2>🛠️ Recommendations</h2>
+                        <div id="recommendationsList" class="recommendations-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 4: Documentation -->
+            <section id="docs" class="tab-content">
+                <div class="card">
+                    <h2>Documentation</h2>
+                    
+                    <h3>Supported Input Types</h3>
+                    <ul>
+                        <li><strong>Text:</strong> Plain text input or snippets</li>
+                        <li><strong>Log:</strong> System and application log files</li>
+                        <li><strong>SQL:</strong> SQL code and queries</li>
+                        <li><strong>Chat:</strong> Chat logs and conversations</li>
+                    </ul>
+
+                    <h3>Detected Threats</h3>
+                    <ul>
+                        <li>Email addresses</li>
+                        <li>Phone numbers</li>
+                        <li>API keys and tokens</li>
+                        <li>Passwords and credentials</li>
+                        <li>AWS keys and secrets</li>
+                        <li>JWT tokens</li>
+                        <li>Credit card numbers</li>
+                        <li>Social Security Numbers</li>
+                        <li>SQL injection patterns</li>
+                        <li>Stack traces</li>
+                    </ul>
+
+                    <h3>Risk Levels</h3>
+                    <div class="risk-legend">
+                        <div><span class="risk-badge critical">CRITICAL</span> - Immediate action required</div>
+                        <div><span class="risk-badge high">HIGH</span> - Significant security risk</div>
+                        <div><span class="risk-badge medium">MEDIUM</span> - Moderate concern</div>
+                        <div><span class="risk-badge low">LOW</span> - Minimal impact</div>
+                    </div>
+
+                    <h3>API Endpoints</h3>
+                    <ul>
+                        <li><code>POST /analyze</code> - Analyze text input</li>
+                        <li><code>POST /analyze/file</code> - Analyze file upload</li>
+                        <li><code>POST /analyze/batch</code> - Batch analysis</li>
+                        <li><code>GET /health</code> - Health check</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 AI Secure Data Intelligence Platform | Built for Security Excellence</p>
+        </footer>
+    </div>
+
+    <script src="static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+2026-03-10 10:00:01 INFO [AuthService] User login attempt
+2026-03-10 10:00:02 INFO [AuthService] User: admin, email: admin@company.com, password: admin123
+2026-03-10 10:00:03 INFO [APIGateway] API Key generated: sk-prod-xyz789abc123def456ghij
+2026-03-10 10:00:04 DEBUG [Database] Connection string: postgresql://root:P@ssw0rd123@db.internal.com:5432/prod_db
+2026-03-10 10:00:05 INFO [AuthService] Authentication successful
+2026-03-10 10:00:06 INFO [SessionManager] Session token created: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImFkbWluIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+2026-03-10 10:00:07 INFO [EmailService] Sending welcome email to admin@company.com
+2026-03-10 10:00:08 INFO [ProfileService] Loading admin profile
+2026-03-10 10:00:09 ERROR [ProfileService] NullPointerException at service.java:45
+2026-03-10 10:00:10 ERROR [StackTrace] 
+   at com.example.ProfileService.loadProfile(ProfileService.java:45)
+   at com.example.AuthService.authenticate(AuthService.java:156)
+   at com.example.gateway.RequestHandler.handle(RequestHandler.java:89)
+   at java.lang.Thread.run(Unknown Source)
+2026-03-10 10:01:01 WARNING [AuthService] Multiple failed login attempts detected from 192.168.1.100
+2026-03-10 10:01:02 ERROR [AuthService] Login failed for user: hacker@suspicious.com
+2026-03-10 10:01:03 ERROR [AuthService] Login failed for user: hacker@suspicious.com
+2026-03-10 10:01:04 ERROR [AuthService] Login failed for user: hacker@suspicious.com
+2026-03-10 10:01:05 INFO [SecurityMonitor] Brute force attack detected from 192.168.1.100
+2026-03-10 10:02:01 DEBUG [CreditCardProcessor] Processing payment for card: 4532-1488-0343-6467
+2026-03-10 10:02:02 DEBUG [CreditCardProcessor] CVV: 123, Expiry: 12/25
+2026-03-10 10:02:03 INFO [PaymentGateway] Payment processed successfully (Transaction ID: TXN-123456)
+2026-03-10 10:03:01 INFO [SQLService] Executing query: SELECT * FROM users WHERE id = 1 OR 1=1; DROP TABLE users;
+2026-03-10 10:03:02 DEBUG [DatabasePool] Query executed on connection pool
+2026-03-10 10:03:03 ERROR [SQLService] SQL Injection attempt detected!
+2026-03-10 10:04:01 INFO [APIKeyManager] AWS Access Key: AKIA5QBSTQ6T7K2EXAMPLE
+2026-03-10 10:04:02 INFO [APIKeyManager] AWS Secret Key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+2026-03-10 10:04:03 DEBUG [CloudService] Connecting to S3 bucket: my-secret-bucket
+2026-03-10 10:05:01 INFO [HealthCheck] System status: HEALTHY
+2026-03-10 10:05:02 INFO [HealthCheck] Database: OK (response time: 45ms)
+2026-03-10 10:05:03 INFO [HealthCheck] Cache: OK (Redis cluster at 10.0.0.5:6379)
+2026-03-10 10:05:04 INFO [HealthCheck] MessageQueue: OK (RabbitMQ at messaging.internal.com)
